@@ -100,7 +100,12 @@ export const MintOverlay = () => {
           <PopoverClose onClick={() => setOpenPopoverMint(undefined)}></PopoverClose>
           <PopoverTitle>MINT OG</PopoverTitle>
           {new Array(5).fill('0').map((_, index) => (
-            <Mint key={index} amount={index + 1} type={MintType.OG} />
+            <Mint
+              key={index}
+              amount={index + 1}
+              type={MintType.OG}
+              onClick={() => setOpenPopoverMint(undefined)}
+            />
           ))}
         </Popover>
       )}
@@ -109,7 +114,12 @@ export const MintOverlay = () => {
           <PopoverClose onClick={() => setOpenPopoverMint(undefined)}></PopoverClose>
           <PopoverTitle>MINT WHITELIST</PopoverTitle>
           {new Array(5).fill('0').map((_, index) => (
-            <Mint key={index} amount={index + 1} type={MintType.WHITELIST} />
+            <Mint
+              key={index}
+              amount={index + 1}
+              type={MintType.WHITELIST}
+              onClick={() => setOpenPopoverMint(undefined)}
+            />
           ))}
         </Popover>
       )}
@@ -118,7 +128,12 @@ export const MintOverlay = () => {
           <PopoverClose onClick={() => setOpenPopoverMint(undefined)}></PopoverClose>
           <PopoverTitle>MINT PUBLIC</PopoverTitle>
           {new Array(10).fill('0').map((_, index) => (
-            <Mint key={index} amount={index + 1} type={MintType.PUBLIC} />
+            <Mint
+              key={index}
+              amount={index + 1}
+              type={MintType.PUBLIC}
+              onClick={() => setOpenPopoverMint(undefined)}
+            />
           ))}
         </Popover>
       )}
@@ -131,9 +146,10 @@ const mintEntrypointMapping = {
   [MintType.WHITELIST]: 'mintWhitelist',
   [MintType.PUBLIC]: 'mint',
 };
-type MintProps = { amount: number; type: MintType };
-const Mint: FC<MintProps> = ({ amount, type }) => {
+type MintProps = { amount: number; type: MintType; onClick?: () => any };
+const Mint: FC<MintProps> = ({ amount, type, onClick }) => {
   const onMint = async () => {
+    onClick?.();
     const starknet = getStarknet();
     const fee = await getMintFee(type);
     const approvePrice = fee.mul(web3Utils.toBN(amount));

@@ -17,7 +17,7 @@ enum MintType {
 }
 
 const isOpenMintWhitelist = () => {
-  const openTime = 1676214000000; // 15h UTC
+  const openTime = 1676213940000; // 15h UTC
   return new Date().getTime() >= openTime;
 };
 

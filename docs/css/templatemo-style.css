@@ -721,3 +721,52 @@ figure.effect-julia:hover p {
   display: none;
 }
 /*============ Preloader ends ==================================*/
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.popup .overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.popup.open {
+  display: flex;
+}
+.popup .box {
+  width: 1000px;
+  max-width: 90%;
+  position: relative;
+}
+.popup .box .close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  background-color: #e73b23;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 2px;
+}
+.popup .box img {
+  width: 100%;
+}

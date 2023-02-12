@@ -5,6 +5,7 @@ import { EHT_CONTRACT_ADDRESS, NFT_CONTRACT_ADDRESS } from './utils/config';
 import { connectWallet, disconnectWallet, getStarknet, initialConnect } from './utils/starknet';
 import { useResponsiveValue } from './utils/useResponsiveValue';
 import web3Utils from 'web3-utils';
+import { toast } from 'react-toastify';
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
 export const mintOverlayHeight = { desktop: 80, tablet: 80, mobile: 60 };
@@ -53,15 +54,15 @@ export const MintOverlay = () => {
         )}
         {!!isConnected && (
           <>
-            <Button outline={false} onClick={() => setOpenPopoverMint(MintType.OG)}>
+            {/* <Button outline={false} onClick={() => setOpenPopoverMint(MintType.OG)}>
               MINT OG
             </Button>
-            &nbsp;&nbsp;&nbsp;
-            <Button outline onClick={() => setOpenPopoverMint(MintType.WHITELIST)}>
+            &nbsp;&nbsp;&nbsp; */}
+            <Button outline={false} onClick={() => setOpenPopoverMint(MintType.WHITELIST)}>
               MINT WHITELIST
             </Button>
             &nbsp;&nbsp;&nbsp;
-            <Button outline onClick={() => setOpenPopoverMint(MintType.PUBLIC)}>
+            <Button outline disabled onClick={() => setOpenPopoverMint(MintType.PUBLIC)}>
               MINT PUBLIC
             </Button>
             {!isMobile && (
@@ -149,24 +150,32 @@ const mintEntrypointMapping = {
 type MintProps = { amount: number; type: MintType; onClick?: () => any };
 const Mint: FC<MintProps> = ({ amount, type, onClick }) => {
   const onMint = async () => {
-    onClick?.();
-    const starknet = getStarknet();
-    const fee = await getMintFee(type);
-    const approvePrice = fee.mul(web3Utils.toBN(amount));
-    const entrypoint = mintEntrypointMapping[type];
+    const loadingId = toast.loading('Minting...');
+    try {
+      onClick?.();
+      const starknet = getStarknet();
+      const fee = await getMintFee(type);
+      const approvePrice = fee.mul(web3Utils.toBN(amount));
+      const entrypoint = mintEntrypointMapping[type];
 
-    await starknet.account.execute([
-      {
-        contractAddress: EHT_CONTRACT_ADDRESS,
-        entrypoint: 'approve',
-        calldata: [NFT_CONTRACT_ADDRESS, approvePrice, 0],
-      },
-      ...Array(amount).fill({
-        contractAddress: NFT_CONTRACT_ADDRESS,
-        entrypoint: entrypoint,
-        calldata: [starknet.account.address],
-      }),
-    ]);
+      await starknet.account.execute([
+        {
+          contractAddress: EHT_CONTRACT_ADDRESS,
+          entrypoint: 'approve',
+          calldata: [NFT_CONTRACT_ADDRESS, approvePrice, 0],
+        },
+        ...Array(amount).fill({
+          contractAddress: NFT_CONTRACT_ADDRESS,
+          entrypoint: entrypoint,
+          calldata: [starknet.account.address],
+        }),
+      ]);
+      toast.dismiss(loadingId);
+      toast.error('Minted successfully');
+    } catch (error) {
+      toast.dismiss(loadingId);
+      toast.error('Mint failure');
+    }
   };
   return (
     <MintButton block outline onClick={onMint}>
@@ -178,7 +187,7 @@ const Mint: FC<MintProps> = ({ amount, type, onClick }) => {
 const getFeeEntrypointMapping = {
   [MintType.OG]: 'getOgMintFee',
   [MintType.WHITELIST]: 'getWhitelistMintFee',
-  [MintType.PUBLIC]: 'getPublicMintFee',
+  [MintType.PUBLIC]: 'getMintFee',
 };
 const getMintFee = async (type: MintType) => {
   const starknet = getStarknet();

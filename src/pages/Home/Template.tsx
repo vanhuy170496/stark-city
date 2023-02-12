@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useResponsiveValue } from '../../components/MintOverlay/utils/useResponsiveValue';
 
 type TemplateProps = {
@@ -9,12 +9,19 @@ type TemplateProps = {
   };
 };
 export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
+  const [openPopup, setOpenPopup] = useState(false);
   const paddingBottom = useResponsiveValue(offsetBottom || { desktop: 0, tablet: 0, mobile: 0 });
 
   useEffect(() => {
     // @ts-ignore
     window.openPage(1);
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOpenPopup(true);
+    }, 1000);
+  }, [setOpenPopup]);
 
   return (
     <div style={{ paddingBottom }}>
@@ -61,12 +68,6 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
                         </a>
                         <div className="circle" />
                       </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="#0" data-no={4}>
-                          Contact
-                        </a>
-                        <div className="circle" />
-                      </li>
                     </ul>
                   </div>
                 </nav>
@@ -80,23 +81,33 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
               <div className="page-width-1 page-left">
                 <div className="d-flex position-relative tm-border-top tm-border-bottom intro-container">
                   <div className="intro-left tm-bg-dark">
-                    <h2 className="mb-4">Welcome to Astro Motion</h2>
-                    <p className="mb-4">
-                      This HTML template has a motion video background loop which is provided by
-                      <a rel="sponsored" href="https://getfreepictures.com" target="_blank">
-                        Get Free Pictures
-                      </a>
-                      . This is one-page responsive layout for your websites. Feel free to use this
-                      for a commercial purpose.
-                    </p>
-                    <p className="mb-0">
-                      You are not permitted to redistribute this template on your Free CSS
-                      collection websites. Please
-                      <a rel="nofollow" href="https://templatemo.com/contact" target="_blank">
-                        contact us
-                      </a>
-                      for more information.
-                    </p>
+                    <h2 className="mb-4">Starknet City</h2>
+                    <div style={{ overflow: 'auto', maxHeight: 300 }}>
+                      <p className="mb-4">
+                        Starknet City is a multi-functional NFT Collection built on Starknet with
+                        the ultimate goal to bridge the gap between high quality art & blockchain
+                        technologies
+                      </p>
+                      <p className="mb-4">
+                        Collect our NFT characters, unlock a proportion of income revenue and
+                        staking rewards.
+                      </p>
+                      <p className="mb-4">
+                        In our city, you will have properties such as lands, weapons, vehicles, and
+                        skins,... Use them to complete our missions. The higher level of the mission
+                        is completed, the more you'll earn from Starknet City.
+                      </p>
+                      <p className="mb-4">
+                        More than that you can join any Gangs that you like or maybe just build your
+                        own Gang. Build your Gang, grow your small community, and complete missions
+                        together.
+                      </p>
+                      <p className="mb-4">
+                        DAO voting connects the community at the forefront of development where
+                        players own the platform and decide its future.
+                      </p>
+                      <p className="mb-0">More to be unlocked as the journey continues.</p>
+                    </div>
                   </div>
                   <div className="intro-right">
                     <img src="img/home-img-1.jpg" alt="Image" className="img-fluid intro-img-1" />
@@ -215,99 +226,31 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
                 <div className="circle intro-circle-3" />
                 <div className="circle intro-circle-4" />
                 <div className="tm-bg-dark content-pad">
-                  <h2 className="mb-4">About our company</h2>
+                  <h2 className="mb-4">About Stark City</h2>
                   <p className="mb-4">
-                    You are <span className="highlight">allowed</span> to use Astro Motion HTML
-                    Template for your websites. You are not allowed to re-distribute this template
-                    ZIP file on any Free CSS template collection website. Illegal redistribution is
-                    strongly prohibited.
+                    Starknet City is a multi-functional NFT Collection built on Starknet with the
+                    ultimate goal to bridge the gap between high quality art & blockchain
+                    technologies
                   </p>
-                  <p>
-                    Praesent auctor rhoncus arcu, vitae blandit est vestibulum sit amet. Integer
-                    erat turpis, vestibulum pellentesque aliquam ultricies, finibus nec dui. Donec
-                    bibendum enim mi, at tristique leo feugiat at. Thank you for visiting Template
-                    Mo.
+                  <p className="mb-4">
+                    Collect our NFT characters, unlock a proportion of income revenue and staking
+                    rewards.
                   </p>
-                </div>
-              </div>
-            </li>
-            <li data-page-no={4}>
-              <div className="mx-auto page-width-2">
-                <div className="row">
-                  <div className="col-md-6 me-0 ms-auto">
-                    <h2 className="mb-4">Contact Us</h2>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6 tm-contact-left">
-                    <form action="#" method="POST" className="contact-form">
-                      <div className="input-group tm-mb-30">
-                        <input
-                          name="name"
-                          type="text"
-                          className="form-control rounded-0 border-top-0 border-end-0 border-start-0"
-                          placeholder="Name"
-                        />
-                      </div>
-                      <div className="input-group tm-mb-30">
-                        <input
-                          name="email"
-                          type="text"
-                          className="form-control rounded-0 border-top-0 border-end-0 border-start-0"
-                          placeholder="Email"
-                        />
-                      </div>
-                      <div className="input-group tm-mb-30">
-                        <textarea
-                          rows={5}
-                          name="message"
-                          className="textarea form-control rounded-0 border-top-0 border-end-0 border-start-0"
-                          placeholder="Message"
-                          defaultValue={''}
-                        />
-                      </div>
-                      <div className="input-group justify-content-end">
-                        <input
-                          type="submit"
-                          className="btn btn-primary tm-btn-pad-2"
-                          defaultValue="Send"
-                        />
-                      </div>
-                    </form>
-                  </div>
-                  <div className="col-md-6 tm-contact-right">
-                    <p className="mb-4">
-                      Integer erat turpis, vestibulum pellentesque aliquam ultricies, finibus nec
-                      dui. Donec bibendum enim mi, at tristique leo feugiat at.
-                    </p>
-                    <div>
-                      Email:
-                      <a href="mailto:info@company.com" className="tm-link-white">
-                        info@company.com
-                      </a>
-                    </div>
-                    <div className="tm-mb-45">
-                      Tel:{' '}
-                      <a href="tel:0100200340" className="tm-link-white">
-                        010-020-0340
-                      </a>
-                    </div>
-                    {/* Map */}
-                    <div className="map-outer">
-                      <div className="gmap-canvas">
-                        <iframe
-                          width="100%"
-                          height={400}
-                          id="gmap-canvas"
-                          src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                          frameBorder={0}
-                          scrolling="no"
-                          marginHeight={0}
-                          marginWidth={0}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <p className="mb-4">
+                    In our city, you will have properties such as lands, weapons, vehicles, and
+                    skins,... Use them to complete our missions. The higher level of the mission is
+                    completed, the more you'll earn from Starknet City.
+                  </p>
+                  <p className="mb-4">
+                    More than that you can join any Gangs that you like or maybe just build your own
+                    Gang. Build your Gang, grow your small community, and complete missions
+                    together.
+                  </p>
+                  <p className="mb-4">
+                    DAO voting connects the community at the forefront of development where players
+                    own the platform and decide its future.
+                  </p>
+                  <p className="mb-0">More to be unlocked as the journey continues.</p>
                 </div>
               </div>
             </li>
@@ -315,21 +258,18 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
         </div>
         <div className="container-fluid">
           <footer className="row mx-auto tm-footer">
-            <div className="col-md-6 px-0">
-              Copyright 2021 Astro Motion Company Limited. All rights reserved.
-            </div>
-            <div className="col-md-6 px-0 tm-footer-right">
-              Designed by
-              <a
-                rel="sponsored"
-                href="https://templatemo.com"
-                target="_blank"
-                className="tm-link-white"
-              >
-                TemplateMo
-              </a>
-            </div>
+            <div className="col-md-6 px-0">Copyright 2023 StarkCity. All rights reserved.</div>
+            <div className="col-md-6 px-0 tm-footer-right">Designed by StarkCity</div>
           </footer>
+        </div>
+      </div>
+      <div className={`popup ${openPopup ? 'open' : ''}`}>
+        <div className="overlay" onClick={() => setOpenPopup(false)}></div>
+        <div className="box">
+          <div className="close" onClick={() => setOpenPopup(false)}>
+            X
+          </div>
+          <img src="/img/popup.jpeg" alt="" />
         </div>
       </div>
       <div id="loader-wrapper">

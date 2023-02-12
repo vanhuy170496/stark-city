@@ -16,12 +16,25 @@ enum MintType {
   PUBLIC,
 }
 
+const isOpenMintWhitelist = () => {
+  const openTime = 1676214000000; // 15h UTC
+  return new Date().getTime() >= openTime;
+};
+
 export const MintOverlay = () => {
   const height = useResponsiveValue(mintOverlayHeight);
   const isMobile = useResponsiveValue({ desktop: false, tablet: false, mobile: true });
   const [isConnected, setIsConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState('');
   const [openPopoverMint, setOpenPopoverMint] = useState<MintType>();
+  const [openMintWhitelist, setOpenMintWhitelist] = useState(isOpenMintWhitelist());
+
+  useEffect(() => {
+    const timeout = setInterval(() => {
+      setOpenMintWhitelist(isOpenMintWhitelist());
+    }, 1000);
+    return () => clearInterval(timeout);
+  }, [setOpenMintWhitelist]);
 
   const loadInfo = useCallback(() => {
     const starknet = getStarknet();
@@ -58,7 +71,7 @@ export const MintOverlay = () => {
               MINT OG
             </Button>
             &nbsp;&nbsp;&nbsp; */}
-            <Button outline={false} onClick={() => setOpenPopoverMint(MintType.WHITELIST)}>
+            <Button outline={false} disabled={!openMintWhitelist} onClick={() => setOpenPopoverMint(MintType.WHITELIST)}>
               MINT WHITELIST
             </Button>
             &nbsp;&nbsp;&nbsp;

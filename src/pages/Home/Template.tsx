@@ -35,7 +35,7 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
               <div className="cd-slider-nav">
                 <nav className="navbar navbar-expand-lg" id="tm-nav">
                   <a className="navbar-brand" href="#">
-                    Stark City
+                    Starknet City
                   </a>
                   <button
                     className="navbar-toggler"
@@ -226,7 +226,7 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
                 <div className="circle intro-circle-3" />
                 <div className="circle intro-circle-4" />
                 <div className="tm-bg-dark content-pad">
-                  <h2 className="mb-4">About Stark City</h2>
+                  <h2 className="mb-4">About Starknet City</h2>
                   <p className="mb-4">
                     Starknet City is a multi-functional NFT Collection built on Starknet with the
                     ultimate goal to bridge the gap between high quality art & blockchain

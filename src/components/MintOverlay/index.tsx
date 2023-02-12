@@ -127,7 +127,7 @@ export const MintOverlay = () => {
         <Popover>
           <PopoverClose onClick={() => setOpenPopoverMint(undefined)}></PopoverClose>
           <PopoverTitle>MINT WHITELIST</PopoverTitle>
-          {new Array(5).fill('0').map((_, index) => (
+          {new Array(10).fill('0').map((_, index) => (
             <Mint
               key={index}
               amount={index + 1}

@@ -17,11 +17,11 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
     window.openPage(1);
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setOpenPopup(true);
-    }, 1000);
-  }, [setOpenPopup]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setOpenPopup(true);
+  //   }, 1000);
+  // }, [setOpenPopup]);
 
   return (
     <div style={{ paddingBottom }}>
@@ -78,12 +78,14 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
         <div className="container-fluid tm-content-container">
           <ul className="cd-hero-slider mb-0 py-5">
             <li className="px-3" data-page-no={1}>
-              <div className="page-width-1 page-left">
-                <div className="d-flex position-relative tm-border-top tm-border-bottom intro-container">
-                  <div className="intro-left tm-bg-dark">
-                    <h2 className="mb-4">Starknet City</h2>
-                    <div style={{ overflow: 'auto', maxHeight: 300 }}>
-                      <p className="mb-4">
+              <div className="page-width-1 mx-auto">
+                <div className="position-relative tm-border-top tm-border-bottom intro-container">
+                  <div className='mb-4'>
+                    <img src="/img/popup.jpeg" alt="" className='w-100' />
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-7">
+                      <p className="mb-4 mt-4">
                         Starknet City is a multi-functional NFT Collection built on Starknet with
                         the ultimate goal to bridge the gap between high quality art & blockchain
                         technologies
@@ -92,7 +94,27 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
                         Collect our NFT characters, unlock a proportion of income revenue and
                         staking rewards.
                       </p>
-                      <p className="mb-4">
+                    </div>
+                    <div className="col-sm-5">
+                      <img
+                        src="img/home-img-1.jpg"
+                        alt="Image"
+                        className="img-fluid intro-img-1 w-100"
+                      />
+                      <br />
+                      <br />
+                    </div>
+                    <div className="col-sm-5">
+                      <img
+                        src="img/home-img-3.jpg"
+                        alt="Image"
+                        className="img-fluid intro-img-1 w-100"
+                      />
+                      <br />
+                      <br />
+                    </div>
+                    <div className="col-sm-7">
+                      <p className="mb-4 mt-4">
                         In our city, you will have properties such as lands, weapons, vehicles, and
                         skins,... Use them to complete our missions. The higher level of the mission
                         is completed, the more you'll earn from Starknet City.
@@ -102,16 +124,23 @@ export const Template: FC<TemplateProps> = ({ offsetBottom }) => {
                         own Gang. Build your Gang, grow your small community, and complete missions
                         together.
                       </p>
-                      <p className="mb-4">
+                    </div>
+                    <div className="col-sm-7">
+                      <p className="mb-4 mt-4">
                         DAO voting connects the community at the forefront of development where
                         players own the platform and decide its future.
                       </p>
-                      <p className="mb-0">More to be unlocked as the journey continues.</p>
+                      <p className="mb-4">More to be unlocked as the journey continues.</p>
                     </div>
-                  </div>
-                  <div className="intro-right">
-                    <img src="img/home-img-1.jpg" alt="Image" className="img-fluid intro-img-1" />
-                    <img src="img/home-img-2.jpg" alt="Image" className="img-fluid intro-img-2" />
+                    <div className="col-sm-5">
+                      <img
+                        src="img/home-img-4.jpg"
+                        alt="Image"
+                        className="img-fluid intro-img-1 w-100"
+                      />
+                      <br />
+                      <br />
+                    </div>
                   </div>
                   <div className="circle intro-circle-1" />
                   <div className="circle intro-circle-2" />

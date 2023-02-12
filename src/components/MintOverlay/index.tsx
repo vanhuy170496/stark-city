@@ -172,14 +172,16 @@ const Mint: FC<MintProps> = ({ amount, type, onClick }) => {
       onClick?.();
       const starknet = getStarknet();
       const fee = await getMintFee(type);
+      console.log("1111", web3Utils.toBN(amount))
       const approvePrice = fee.mul(web3Utils.toBN(amount));
+      console.log("2222")
       const entrypoint = mintEntrypointMapping[type];
 
       await starknet.account.execute([
         {
           contractAddress: EHT_CONTRACT_ADDRESS,
           entrypoint: 'approve',
-          calldata: [NFT_CONTRACT_ADDRESS, approvePrice.toNumber(), 0],
+          calldata: [NFT_CONTRACT_ADDRESS, approvePrice.toString(), 0],
         },
         ...Array(amount).fill({
           contractAddress: NFT_CONTRACT_ADDRESS,

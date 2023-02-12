@@ -105,10 +105,10 @@ export const MintOverlay = () => {
       </Left>
       {/* <div>Minted 0/{maxSupply}</div> */}
       <Right>
-        {/* <a target="_blank" href="#discord">
+        <a target="_blank" href="https://mintsquare.io/collection/starknet/0x1eb4c7362a0c8647eaf422edca544aa12430a136fe0733689b26d22942fc367">
           Mint Square
         </a>
-        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; */}
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
         <a target="_blank" href="https://twitter.com/starknetcity">
           Twitter
         </a>

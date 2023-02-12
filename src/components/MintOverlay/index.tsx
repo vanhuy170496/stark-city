@@ -88,12 +88,12 @@ export const MintOverlay = () => {
       </Left>
       {/* <div>Minted 0/{maxSupply}</div> */}
       <Right>
-        <a target="_blank" href="#twitter">
-          Twitter
+        {/* <a target="_blank" href="#discord">
+          Mint Square
         </a>
-        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-        <a target="_blank" href="#discord">
-          Discord
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; */}
+        <a target="_blank" href="https://twitter.com/starknetcity">
+          Twitter
         </a>
       </Right>
       {openPopoverMint === MintType.OG && (

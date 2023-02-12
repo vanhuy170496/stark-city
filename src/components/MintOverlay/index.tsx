@@ -71,7 +71,11 @@ export const MintOverlay = () => {
               MINT OG
             </Button>
             &nbsp;&nbsp;&nbsp; */}
-            <Button outline={false} disabled={!openMintWhitelist} onClick={() => setOpenPopoverMint(MintType.WHITELIST)}>
+            <Button
+              outline={false}
+              disabled={!openMintWhitelist}
+              onClick={() => setOpenPopoverMint(MintType.WHITELIST)}
+            >
               MINT WHITELIST
             </Button>
             &nbsp;&nbsp;&nbsp;
@@ -156,8 +160,8 @@ export const MintOverlay = () => {
 };
 
 const mintEntrypointMapping = {
-  [MintType.OG]: 'mintOG',
-  [MintType.WHITELIST]: 'mintWhitelist',
+  [MintType.OG]: 'ogMint',
+  [MintType.WHITELIST]: 'whitelistMint',
   [MintType.PUBLIC]: 'mint',
 };
 type MintProps = { amount: number; type: MintType; onClick?: () => any };
@@ -175,7 +179,7 @@ const Mint: FC<MintProps> = ({ amount, type, onClick }) => {
         {
           contractAddress: EHT_CONTRACT_ADDRESS,
           entrypoint: 'approve',
-          calldata: [NFT_CONTRACT_ADDRESS, approvePrice, 0],
+          calldata: [NFT_CONTRACT_ADDRESS, approvePrice.toNumber(), 0],
         },
         ...Array(amount).fill({
           contractAddress: NFT_CONTRACT_ADDRESS,
@@ -184,8 +188,9 @@ const Mint: FC<MintProps> = ({ amount, type, onClick }) => {
         }),
       ]);
       toast.dismiss(loadingId);
-      toast.error('Minted successfully');
+      toast.success('Minted successfully');
     } catch (error) {
+      console.log(error);
       toast.dismiss(loadingId);
       toast.error('Mint failure');
     }

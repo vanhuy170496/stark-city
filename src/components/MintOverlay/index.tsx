@@ -79,7 +79,7 @@ export const MintOverlay = () => {
               MINT WHITELIST
             </Button>
             &nbsp;&nbsp;&nbsp;
-            <Button outline disabled onClick={() => setOpenPopoverMint(MintType.PUBLIC)}>
+            <Button outline onClick={() => setOpenPopoverMint(MintType.PUBLIC)}>
               MINT PUBLIC
             </Button>
             {!isMobile && (
@@ -172,9 +172,7 @@ const Mint: FC<MintProps> = ({ amount, type, onClick }) => {
       onClick?.();
       const starknet = getStarknet();
       const fee = await getMintFee(type);
-      console.log("1111", web3Utils.toBN(amount))
       const approvePrice = fee.mul(web3Utils.toBN(amount));
-      console.log("2222")
       const entrypoint = mintEntrypointMapping[type];
 
       await starknet.account.execute([

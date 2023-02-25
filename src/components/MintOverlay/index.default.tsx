@@ -67,8 +67,20 @@ export const MintOverlay = () => {
         )}
         {!!isConnected && (
           <>
-            <Button outline={false} onClick={() => mintFree(MintType.OG, 1)}>
-              CLAIM
+            {/* <Button outline={false} onClick={() => setOpenPopoverMint(MintType.OG)}>
+              MINT OG
+            </Button>
+            &nbsp;&nbsp;&nbsp; */}
+            <Button
+              outline={false}
+              disabled={!openMintWhitelist}
+              onClick={() => setOpenPopoverMint(MintType.WHITELIST)}
+            >
+              MINT WHITELIST
+            </Button>
+            &nbsp;&nbsp;&nbsp;
+            <Button outline onClick={() => setOpenPopoverMint(MintType.PUBLIC)}>
+              MINT PUBLIC
             </Button>
             {!isMobile && (
               <>
@@ -91,11 +103,9 @@ export const MintOverlay = () => {
           </>
         )}
       </Left>
+      {/* <div>Minted 0/{maxSupply}</div> */}
       <Right>
-        <a
-          target="_blank"
-          href="https://mintsquare.io/collection/starknet/0x1eb4c7362a0c8647eaf422edca544aa12430a136fe0733689b26d22942fc367"
-        >
+        <a target="_blank" href="https://mintsquare.io/collection/starknet/0x1eb4c7362a0c8647eaf422edca544aa12430a136fe0733689b26d22942fc367">
           Mint Square
         </a>
         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -103,6 +113,48 @@ export const MintOverlay = () => {
           Twitter
         </a>
       </Right>
+      {openPopoverMint === MintType.OG && (
+        <Popover>
+          <PopoverClose onClick={() => setOpenPopoverMint(undefined)}></PopoverClose>
+          <PopoverTitle>MINT OG</PopoverTitle>
+          {new Array(5).fill('0').map((_, index) => (
+            <Mint
+              key={index}
+              amount={index + 1}
+              type={MintType.OG}
+              onClick={() => setOpenPopoverMint(undefined)}
+            />
+          ))}
+        </Popover>
+      )}
+      {openPopoverMint === MintType.WHITELIST && (
+        <Popover>
+          <PopoverClose onClick={() => setOpenPopoverMint(undefined)}></PopoverClose>
+          <PopoverTitle>MINT WHITELIST</PopoverTitle>
+          {new Array(10).fill('0').map((_, index) => (
+            <Mint
+              key={index}
+              amount={index + 1}
+              type={MintType.WHITELIST}
+              onClick={() => setOpenPopoverMint(undefined)}
+            />
+          ))}
+        </Popover>
+      )}
+      {openPopoverMint === MintType.PUBLIC && (
+        <Popover>
+          <PopoverClose onClick={() => setOpenPopoverMint(undefined)}></PopoverClose>
+          <PopoverTitle>MINT PUBLIC</PopoverTitle>
+          {new Array(10).fill('0').map((_, index) => (
+            <Mint
+              key={index}
+              amount={index + 1}
+              type={MintType.PUBLIC}
+              onClick={() => setOpenPopoverMint(undefined)}
+            />
+          ))}
+        </Popover>
+      )}
     </Container>
   );
 };
@@ -163,27 +215,6 @@ const getMintFee = async (type: MintType) => {
     calldata: [],
   });
   return web3Utils.toBN(result[0]);
-};
-const mintFree = async (type: MintType, amount: number) => {
-  const loadingId = toast.loading('Minting...');
-  try {
-    const starknet = getStarknet();
-    const entrypoint = mintEntrypointMapping[type];
-
-    await starknet.account.execute([
-      ...Array(amount).fill({
-        contractAddress: NFT_CONTRACT_ADDRESS,
-        entrypoint: entrypoint,
-        calldata: [starknet.account.address],
-      }),
-    ]);
-    toast.dismiss(loadingId);
-    toast.success('Minted successfully');
-  } catch (error) {
-    console.log(error);
-    toast.dismiss(loadingId);
-    toast.error('Mint failure');
-  }
 };
 
 const Container = styled.div`

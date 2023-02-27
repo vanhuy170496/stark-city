@@ -55,20 +55,36 @@ export const MintOverlay = () => {
     <Container style={{ height }}>
       <Left>
         {!isConnected && (
-          <Button
-            outline={false}
-            onClick={async () => {
-              await connectWallet();
-              loadInfo();
-            }}
-          >
-            MINT NOW
-          </Button>
+          <>
+            <Button
+              outline={false}
+              onClick={async () => {
+                await connectWallet();
+                loadInfo();
+              }}
+            >
+              CLAIM NOW
+            </Button>
+            &nbsp;&nbsp;&nbsp;
+            <Button
+              outline={true}
+              onClick={async () => {
+                await connectWallet();
+                loadInfo();
+              }}
+            >
+              MINT NOW
+            </Button>
+          </>
         )}
         {!!isConnected && (
           <>
             <Button outline={false} onClick={() => mintFree(MintType.OG, 1)}>
               CLAIM
+            </Button>
+            &nbsp;&nbsp;&nbsp;
+            <Button outline onClick={() => setOpenPopoverMint(MintType.PUBLIC)}>
+              MINT
             </Button>
             {!isMobile && (
               <>
@@ -103,6 +119,20 @@ export const MintOverlay = () => {
           Twitter
         </a>
       </Right>
+      {openPopoverMint === MintType.PUBLIC && (
+        <Popover>
+          <PopoverClose onClick={() => setOpenPopoverMint(undefined)}></PopoverClose>
+          <PopoverTitle>MINT</PopoverTitle>
+          {new Array(10).fill('0').map((_, index) => (
+            <Mint
+              key={index}
+              amount={index + 1}
+              type={MintType.PUBLIC}
+              onClick={() => setOpenPopoverMint(undefined)}
+            />
+          ))}
+        </Popover>
+      )}
     </Container>
   );
 };

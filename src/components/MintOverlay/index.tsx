@@ -47,14 +47,14 @@ export const MintOverlay = () => {
     }
   }, [setWalletAddress, setIsConnected]);
 
-  useEffect(() => {
-    initialConnect().then(loadInfo);
-  }, [loadInfo]);
+  // useEffect(() => {
+  //   initialConnect().then(loadInfo);
+  // }, [loadInfo]);
 
   return (
     <Container style={{ height }}>
       <Left>
-        {!isConnected && (
+        {/* {!isConnected && (
           <>
             <Button
               outline={false}
@@ -105,7 +105,7 @@ export const MintOverlay = () => {
               </>
             )}
           </>
-        )}
+        )} */}
       </Left>
       <Right>
         <a
